@@ -14,22 +14,11 @@
       background-color: transparent;
       transition: background-color 0.3s ease;
       z-index: 9999;
-      pointer-events: auto;
+      pointer-events: none; /* Permet aux clics de passer à travers */
     }
 
-    /* Effet hover actif seulement quand en haut de la page */
-    #hoverBar.active:hover {
+    #hoverBar:hover {
       background-color: rgba(0, 0, 0, 0.89);
-    }
-
-    /* Permet de cliquer à travers la barre, même quand elle est noire */
-    #hoverBar::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background-color: transparent;
-      pointer-events: none;
     }
 
     @media (max-width: 768px) {
@@ -42,9 +31,9 @@
 
   function updateHoverBarState() {
     if (window.scrollY === 0) {
-      hoverBar.classList.add('active');
+      hoverBar.style.pointerEvents = 'auto'; // Active le survol uniquement en haut de la page
     } else {
-      hoverBar.classList.remove('active');
+      hoverBar.style.pointerEvents = 'none';
     }
   }
 
