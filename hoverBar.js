@@ -3,14 +3,6 @@
   hoverBar.id = 'hoverBar';
   document.body.prepend(hoverBar);
 
-  const content = document.createElement('div');
-  content.id = 'hoverBarContent';
-  content.innerHTML = `
-    <span class="menu-item">La marque</span>
-    <span class="menu-item">Nos solutions</span>
-  `;
-  hoverBar.appendChild(content);
-
   const style = document.createElement('style');
   style.innerHTML = `
     #hoverBar {
@@ -22,27 +14,24 @@
       background-color: transparent;
       transition: background-color 0.3s ease;
       z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-    #hoverBar.active {
-      background-color: rgba(0, 0, 0, 0.89);
       pointer-events: auto;
     }
-    #hoverBarContent {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      gap: 30px;
-      font-size: 16px;
-      font-family: Arial, sans-serif;
-      color: white;
+
+    /* Effet hover actif seulement quand en haut de la page */
+    #hoverBar.active:hover {
+      background-color: rgba(0, 0, 0, 0.89);
     }
-    .menu-item {
-      cursor: pointer;
+
+    /* Permet de cliquer à travers la barre, même quand elle est noire */
+    #hoverBar::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background-color: transparent;
+      pointer-events: none;
     }
+
     @media (max-width: 768px) {
       #hoverBar {
         display: none;
